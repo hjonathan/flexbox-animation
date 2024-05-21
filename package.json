@@ -1,0 +1,21 @@
+{
+  "name": "vue2-vite",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.3",
+    "vue": "^2.7.16"
+  },
+  "devDependencies": {
+    "bootstrap-icons": "^1.11.3",
+    "sass": "^1.77.2",
+    "vite": "^2.0.5",
+    "vite-plugin-vue2": "^2.0.1",
+    "vue-loader": "^17.4.2"
+  }
+}
