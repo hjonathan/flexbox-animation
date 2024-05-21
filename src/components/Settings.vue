@@ -2,10 +2,10 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  emits: ["pickup"],
+  emits: ["next"],
   setup(props, { emit }) {
     const onClick = () => {
-      emit("pickup");
+      emit("next");
     };
 
     return {

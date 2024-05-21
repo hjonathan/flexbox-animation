@@ -18,8 +18,7 @@ export default defineComponent({
 
 <template>
     <div
-        role="main"
-        class="d-flex flex-column align-items-center justify-content-md-center inner cover bg-dark bg-opacity-75 text-white h-100">
+        class="d-flex w-100 flex-column align-items-center justify-content-md-center inner cover bg-dark bg-opacity-75 text-white h-100">
         <h1 class="cover-heading">Cover your page.</h1>
         <p class="lead">
             Cover is a one-page template for building simple and beautiful home
