@@ -1,13 +1,13 @@
 <template>
   <div id="app">
     <div class="d-flex flex-column h-100">
-      <Header />
+      <Header @open-modal="open" />
       <div class="d-flex bg-opacity-10 h-100 w-100">
         <div
           class="d-flex left-container"
           :class="{ expanded: leftExpanded, contracted: rightExpanded }"
         >
-          <ModelerSection @pickup="closeSidebar" />
+          <ModelerSection @pickup="defaultSize" />
         </div>
 
         <div
@@ -62,6 +62,12 @@ export default defineComponent({
       rightExpanded.value = true;
     };
 
+    const defaultSize = () => {
+      leftExpanded.value = false;
+      rightExpanded.value = null;
+    };
+
+
     const open = () => {
       modal.value.show();
     };
@@ -82,6 +88,7 @@ export default defineComponent({
       modal,
       expandSidebar,
       goAdvancedSettings,
+      defaultSize
     };
   },
 });

@@ -27,7 +27,9 @@
 
     <div class="d-flex">
       <div class="d-flex space-x-3 justify-content-sm-center">
-        <button type="button" class="btn btn-primary btn gap-3">
+        <button
+          @click="openModal"
+          type="button" class="btn btn-primary btn gap-3">
           SHARE SLIDESHOW
         </button>
 
@@ -63,7 +65,22 @@
   </div>
 </template>
 
-<script></script>
+<script>
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  emits: ["open-modal"],
+  setup(props, { emit }) {
+    const openModal = () => {
+      emit("open-modal");
+    };
+
+    return {
+      openModal
+    };
+  },
+});
+</script>
 
 <style scoped>
 .bg-dropdown {
