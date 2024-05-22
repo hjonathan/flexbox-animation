@@ -2,14 +2,19 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  emits: ["pickup"],
+  emits: ["expand", "close"],
   setup(props, { emit }) {
-    const onClick = () => {
-      emit("pickup");
+    const onExpand = () => {
+      emit("expand");
+    };
+
+    const onClose = () => {
+      emit("close");
     };
 
     return {
-      onClick,
+      onClose,
+      onExpand,
     };
   },
 });
@@ -18,75 +23,75 @@ export default defineComponent({
 <template>
   <div>
     <div
-      class="d-flex justify-content-between align-items-center p-2 text-white bg-dark bg-opacity-50 shadow-sm"
+      class="d-flex justify-content-between align-items-center py-2 px-3 text-muted bg-white shadow-sm"
     >
-      <div class="d-flex align-items-center">
-        <img
-          class="me-3"
-          src="https://jonathanquispe.developer.processmaker.net/img/processmaker_icon.png?id=8122489cabc54a228d6b8e8efb72dece"
-          alt=""
-          width="30"
-          height="30"
-        />
+      <div class="d-flex align-items-center space-x-2">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-eye-fill"
+          viewBox="0 0 16 16"
+        >
+          <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+          <path
+            d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"
+          />
+        </svg>
         <div class="lh-1">
-          <h1 class="h6 mb-0 text-white lh-1">ProcessMaker</h1>
+          <span>Preview</span>
         </div>
       </div>
 
       <div class="d-flex align-items-center">
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-          <a href="/" aria-label="Home">
-            <i class="bi bi-house-door-fill"></i>
-          </a>
-          <a href="/" aria-label="Home">
-            <i class="bi bi-house-door-fill"></i>
-          </a>
+          <button
+            @click="onExpand"
+            type="button"
+            class="btn d-flex align-items-center space-x-3 text-muted btn-outline-gray rounded-lg shadow-sm"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="bi bi-fullscreen"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M1.5 1a.5.5 0 0 0-.5.5v4a.5.5 0 0 1-1 0v-4A1.5 1.5 0 0 1 1.5 0h4a.5.5 0 0 1 0 1zM10 .5a.5.5 0 0 1 .5-.5h4A1.5 1.5 0 0 1 16 1.5v4a.5.5 0 0 1-1 0v-4a.5.5 0 0 0-.5-.5h-4a.5.5 0 0 1-.5-.5M.5 10a.5.5 0 0 1 .5.5v4a.5.5 0 0 0 .5.5h4a.5.5 0 0 1 0 1h-4A1.5 1.5 0 0 1 0 14.5v-4a.5.5 0 0 1 .5-.5m15 0a.5.5 0 0 1 .5.5v4a1.5 1.5 0 0 1-1.5 1.5h-4a.5.5 0 0 1 0-1h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 1 .5-.5"
+              />
+            </svg>
+            <span> Full Screen </span>
+          </button>
+
+          <button @click="onClose" type="button" class="btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="20"
+              height="20"
+              fill="currentColor"
+              class="bi bi-x"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"
+              />
+            </svg>
+          </button>
         </div>
       </div>
     </div>
 
     <div>
-      <div class="form-signin p-5">
-        <img
-          class="mb-4"
-          src="https://jonathanquispe.developer.processmaker.net/img/processmaker_icon.png?id=8122489cabc54a228d6b8e8efb72dece"
-          alt=""
-          width="40"
-          height="40"
-        />
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input
-          type="email"
-          id="inputEmail"
-          class="form-control"
-          placeholder="Email address"
-        
-          autofocus=""
-        />
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input
-          type="password"
-          id="inputPassword"
-          class="form-control"
-          placeholder="Password"
-  
-        />
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me" />
-            Remember me
-          </label>
-        </div>
-        <button 
-             @click="onClick()"
-            class="btn btn-lg btn-primary btn-block">
-          Sign in
-        </button>
-        <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
-      </div>
+      <!-- content -->
     </div>
   </div>
 </template>
 
-<style></style>
+<style>
+.btn-outline-gray {
+  border: 1px solid var(--borders, #cdddee) !important;
+}
+</style>

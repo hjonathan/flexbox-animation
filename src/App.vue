@@ -1,58 +1,29 @@
 <template>
   <div id="app">
-    <main class="d-flex flex-column h-100">
-      <div
-        class="d-flex justify-content-between align-items-center p-2 text-white bg-dark bg-opacity-75 shadow-sm"
-      >
-        <div class="d-flex align-items-center">
-          <img
-            class="me-3"
-            src="https://jonathanquispe.developer.processmaker.net/img/processmaker_icon.png?id=8122489cabc54a228d6b8e8efb72dece"
-            alt=""
-            width="45"
-            height="48"
-          />
-          <div class="lh-1">
-            <h1 class="h6 mb-0 text-white lh-1">ProcessMaker</h1>
-          </div>
-        </div>
-
-        <div class="d-flex align-items-center">
-          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <button
-              type="button"
-              @click="open"
-              class="btn btn-primary btn-sm px-4 gap-3"
-            >
-              Share SlideShow
-            </button>
-            <button type="button" class="btn btn-secondary btn-sm px-4">
-              Options
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <div class="d-flex bg-dark bg-opacity-10 h-100 w-100">
+    <div class="d-flex flex-column h-100">
+      <Header />
+      <div class="d-flex bg-opacity-10 h-100 w-100">
         <div
           class="d-flex left-container"
           :class="{ expanded: leftExpanded, contracted: rightExpanded }"
         >
-          <ModelerSection @pickup="pickup" />
+          <ModelerSection @pickup="closeSidebar" />
         </div>
 
         <div
           class="d-flex flex-column right-container"
           :class="{ contracted: leftExpanded, expanded: rightExpanded }"
         >
-          <ScreenSection @pickup="toogleSidebar"></ScreenSection>
+          <ScreenSection
+            @expand="expandSidebar"
+            @close="closeSidebar"
+          ></ScreenSection>
         </div>
       </div>
-    </main>
+    </div>
 
-    <ModalSlidePanel ref="modal"/>
+    <ModalSlidePanel ref="modal" />
     <!-- Modal -->
-
   </div>
 </template>
 
@@ -64,7 +35,7 @@ import ModelerSection from "./components/ModelerSection.vue";
 import { defineComponent, ref, onMounted } from "vue";
 import { defineModel } from "./utils/vue-utils";
 import ModalSlidePanel from "./components/ModalSlidePanel.vue";
-
+import Header from "./components/Header.vue";
 
 export default defineComponent({
   components: {
@@ -72,7 +43,8 @@ export default defineComponent({
     Carrousel,
     ScreenSection,
     ModelerSection,
-    ModalSlidePanel
+    ModalSlidePanel,
+    Header,
   },
   setup() {
     const showSreenSection = ref(true);
@@ -81,16 +53,16 @@ export default defineComponent({
     const leftExpanded = ref(false);
     const rightExpanded = ref(null);
 
-    const pickup = () => {
-      leftExpanded.value = !leftExpanded.value;
+    const closeSidebar = () => {
+      leftExpanded.value = true;
+      rightExpanded.value = false;
     };
 
-    const toogleSidebar = () => {
-      rightExpanded.value = !rightExpanded.value;
+    const expandSidebar = () => {
+      rightExpanded.value = true;
     };
 
     const open = () => {
-         console.log("CREAK POINT:")
       modal.value.show();
     };
 
@@ -98,8 +70,7 @@ export default defineComponent({
       modal.value.hide();
     };
 
-    const goAdvancedSettings = () => {
-    };
+    const goAdvancedSettings = () => {};
 
     return {
       showSreenSection,
@@ -107,10 +78,10 @@ export default defineComponent({
       rightExpanded,
       open,
       close,
-      pickup,
+      closeSidebar,
       modal,
-      toogleSidebar,
-      goAdvancedSettings
+      expandSidebar,
+      goAdvancedSettings,
     };
   },
 });
@@ -152,5 +123,39 @@ export default defineComponent({
 .right-container.expanded {
   flex: 1 1 100%;
   opacity: 1;
+}
+
+.space-x-1 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.25rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.25rem * calc(0.25 - var(--tw-space-x-reverse)));
+}
+
+.space-x-2 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.5rem * calc(0.5 - var(--tw-space-x-reverse)));
+}
+
+.space-x-3 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(0.75rem * var(--tw-space-x-reverse));
+  margin-left: calc(0.75rem * calc(0.75 - var(--tw-space-x-reverse)));
+}
+
+.space-x-4 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1rem * var(--tw-space-x-reverse));
+  margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+}
+.space-x-5 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1.25rem * var(--tw-space-x-reverse));
+  margin-left: calc(1.25rem * calc(1.25 - var(--tw-space-x-reverse)));
+}
+.space-x-6 > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: calc(1.5rem * var(--tw-space-x-reverse));
+  margin-left: calc(1.5rem * calc(1.5 - var(--tw-space-x-reverse)));
 }
 </style>
